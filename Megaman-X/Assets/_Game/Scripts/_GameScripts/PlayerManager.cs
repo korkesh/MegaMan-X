@@ -21,13 +21,16 @@ public class PlayerManager : MonoBehaviour {
 
     public void ChangeState(IState newState)
     {
-        if (currentState != null) currentState.Exit();
+        if (currentState != newState)
+        {
+            if (currentState != null) currentState.Exit();
 
-        previousState = currentState;
-        currentState = newState;
+            previousState = currentState;
+            currentState = newState;
 
-        currentState.Enter();
+            currentState.Enter();
 
+        }
     }
 
 

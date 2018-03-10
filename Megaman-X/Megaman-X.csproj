@@ -294,10 +294,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Game\Scripts\_GameScripts\GroundCheck.cs" />
     <Compile Include="Assets\_Game\Scripts\_GameScripts\IState.cs" />
     <Compile Include="Assets\_Game\Scripts\_GameScripts\PlayerController.cs" />
     <Compile Include="Assets\_Game\Scripts\_GameScripts\PlayerManager.cs" />
+    <Compile Include="Assets\_Game\Scripts\_GameScripts\States\Firing.cs" />
     <Compile Include="Assets\_Game\Scripts\_GameScripts\States\Idle.cs" />
+    <Compile Include="Assets\_Game\Scripts\_GameScripts\States\Jumping.cs" />
     <Compile Include="Assets\_Game\Scripts\_GameScripts\States\Running.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

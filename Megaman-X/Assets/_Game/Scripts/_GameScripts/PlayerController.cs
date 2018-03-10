@@ -6,11 +6,19 @@ public class PlayerController : MonoBehaviour {
 
     private PlayerManager plManager;
     public float moveSpeed;
+    public float activeJumpPower;
 
     public bool canMove;
 
     private Rigidbody2D rb;
     private Animator an;
+
+    public bool isGrounded;
+    private bool isFalling;
+
+    
+
+
 	// Use this for initialization
 	void Start () {
         plManager = new PlayerManager();
@@ -27,44 +35,65 @@ public class PlayerController : MonoBehaviour {
             return;
         }
 
+        //if grounded or falling
+        if (rb.velocity.y > 0)
+        {
+            //isGrounded = false;
+            isFalling = false;
+        }
+        else if (rb.velocity.y < 0)
+        {
+            //isGrounded = false;
+            isFalling = true;
+        }
+        else
+        {
+            //isGrounded = true;
+            isFalling = false;
+        }
+
+
+
         //if right
         if (Input.GetAxisRaw("Horizontal") > 0f)
         {
-
             //set PlayerFSM as Running
-            plManager.ChangeState(new Running());
-
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-            transform.localScale = new Vector3(1f, 1f, 1f);
-
-            
+            plManager.ChangeState(new Running(gameObject, moveSpeed, an, rb, 1));
 
         }
         //if left
         else if (Input.GetAxisRaw("Horizontal") < 0f)
         {
             //set PlayerFSM as Running
-            plManager.ChangeState(new Running());
-
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-
-            
+            plManager.ChangeState(new Running(gameObject, -moveSpeed, an, rb, -1));
 
         }
         //if idle
         else
         {
             //set PlayerFSM as Idle
-            plManager.ChangeState(new Idle());
+            plManager.ChangeState(new Idle(gameObject, 0, an, rb));
 
-            rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+
+        if (Input.GetButtonDown("Jump") && isGrounded && !isFalling)
+        {
+            plManager.ChangeState(new Jumping(gameObject, rb.velocity.x, an, rb, activeJumpPower));
+        }
+
+
         plManager.ExecuteStateUpdate();
 
 
-        an.SetFloat("speed", Mathf.Abs(rb.velocity.x));
-        an.SetBool("grounded", true);
+
+
+
+        
+
+
+        an.SetBool("grounded", isGrounded);
+        an.SetBool("falling", isFalling);
 
     }
 }
