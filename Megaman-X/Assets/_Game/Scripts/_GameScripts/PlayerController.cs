@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    private PlayerManager plManager;
     public float moveSpeed;
 
     public bool canMove;
 
     private Rigidbody2D rb;
-    public Animator an;
+    private Animator an;
 	// Use this for initialization
 	void Start () {
+        plManager = new PlayerManager();
         an = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 	}
@@ -28,28 +30,37 @@ public class PlayerController : MonoBehaviour {
         //if right
         if (Input.GetAxisRaw("Horizontal") > 0f)
         {
+
+            //set PlayerFSM as Running
+            plManager.ChangeState(new Running());
+
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             transform.localScale = new Vector3(1f, 1f, 1f);
 
-            //set PlayerFSM as Running
+            
 
         }
         //if left
         else if (Input.GetAxisRaw("Horizontal") < 0f)
         {
+            //set PlayerFSM as Running
+            plManager.ChangeState(new Running());
+
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
-            //set PlayerFSM as Running
+            
 
         }
         //if idle
         else
         {
             //set PlayerFSM as Idle
+            plManager.ChangeState(new Idle());
 
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+        plManager.ExecuteStateUpdate();
 
 
         an.SetFloat("speed", Mathf.Abs(rb.velocity.x));
