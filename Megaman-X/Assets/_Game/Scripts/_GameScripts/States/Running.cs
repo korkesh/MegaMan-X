@@ -18,7 +18,14 @@ public class Running : IState
         myRb = rb;
         myDirection = direction;
     }
-
+    public void passValues(GameObject owner, float speed, Animator an, Rigidbody2D rb, int direction)
+    {
+        myOwner = owner;
+        mySpeed = speed;
+        myAn = an;
+        myRb = rb;
+        myDirection = direction;
+    }
 
     public void Enter()
     {

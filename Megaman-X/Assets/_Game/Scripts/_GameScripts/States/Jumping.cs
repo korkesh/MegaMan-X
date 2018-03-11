@@ -8,13 +8,16 @@ public class Jumping : IState {
     private float mySpeed;
     private float myJumpPower;
     private Animator myAn;
-    private GameObject myOwner;
     private Rigidbody2D myRb;
 
-    public Jumping(GameObject owner, float speed, Animator an, Rigidbody2D rb, float jumpPower)
+    public Jumping( Animator an, Rigidbody2D rb, float jumpPower)
     {
-        myOwner = owner;
-        mySpeed = speed;
+        myAn = an;
+        myRb = rb;
+        myJumpPower = jumpPower;
+    }
+    public void passValues( Animator an, Rigidbody2D rb, float jumpPower)
+    {
         myAn = an;
         myRb = rb;
         myJumpPower = jumpPower;

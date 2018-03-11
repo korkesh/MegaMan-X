@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class Idle : IState {
 
-    private float mySpeed;
     private Animator myAn;
-    private GameObject myOwner;
     private Rigidbody2D myRb;
 
-    public Idle(GameObject owner, float speed, Animator an, Rigidbody2D rb)
+    public Idle( Animator an, Rigidbody2D rb)
     {
-        myOwner = owner;
-        mySpeed = speed;
+       
         myAn = an;
         myRb = rb;
     }
 
-    public void Enter()
+    public void passValues(Animator an, Rigidbody2D rb)
+    {
+       
+        myAn = an;
+        myRb = rb;
+    }
+
+public void Enter()
     {
         Debug.Log("Enter Idle");
     }
@@ -27,7 +31,7 @@ public class Idle : IState {
         Debug.Log("--- IDLE --- ");
         myRb.velocity = new Vector2(0, myRb.velocity.y);
 
-        myAn.SetFloat("speed", mySpeed);
+        myAn.SetFloat("speed", 0);
     }
 
     public void Exit()

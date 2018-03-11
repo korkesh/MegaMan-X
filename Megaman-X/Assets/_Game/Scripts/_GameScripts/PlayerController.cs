@@ -58,28 +58,32 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetAxisRaw("Horizontal") > 0f)
         {
             //set PlayerFSM as Running
-            plManager.ChangeState(new Running(gameObject, moveSpeed, an, rb, 1));
+            //plManager.ChangeState(new Running(gameObject, moveSpeed, an, rb, 1));
+            plManager.ChangeState(PlayerManager.playerFSM.Running, gameObject, moveSpeed, an, rb, 1);
 
         }
         //if left
         else if (Input.GetAxisRaw("Horizontal") < 0f)
         {
             //set PlayerFSM as Running
-            plManager.ChangeState(new Running(gameObject, -moveSpeed, an, rb, -1));
+            //plManager.ChangeState(new Running(gameObject, -moveSpeed, an, rb, -1));
+            plManager.ChangeState(PlayerManager.playerFSM.Running, gameObject, -moveSpeed, an, rb, -1);
 
         }
         //if idle
         else
         {
             //set PlayerFSM as Idle
-            plManager.ChangeState(new Idle(gameObject, 0, an, rb));
-
+            //plManager.ChangeState(new Idle(an, rb));
+            plManager.ChangeState(PlayerManager.playerFSM.Idle, an, rb);
         }
 
 
         if (Input.GetButtonDown("Jump") && isGrounded && !isFalling)
         {
-            plManager.ChangeState(new Jumping(gameObject, rb.velocity.x, an, rb, activeJumpPower));
+            //set PlayerFSM as Jumping
+            //plManager.ChangeState(new Jumping(an, rb, activeJumpPower));
+            plManager.ChangeState(PlayerManager.playerFSM.Jumping, an, rb, activeJumpPower);
         }
 
 
