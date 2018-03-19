@@ -16,11 +16,15 @@ public class PlayerController : MonoBehaviour {
     public bool isGrounded;
     private bool isFalling;
 
-    
-
+    private float localSpeed;
+    private float localJump;
 
 	// Use this for initialization
 	void Start () {
+
+        localJump = activeJumpPower;
+        localSpeed = moveSpeed;
+
         plManager = new PlayerManager();
         an = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -53,13 +57,19 @@ public class PlayerController : MonoBehaviour {
         }
 
 
+        an.SetBool("grounded", isGrounded);
+        an.SetBool("falling", isFalling);
+
+
 
         //if right
         if (Input.GetAxisRaw("Horizontal") > 0f)
         {
             //set PlayerFSM as Running
             //plManager.ChangeState(new Running(gameObject, moveSpeed, an, rb, 1));
-            plManager.ChangeState(PlayerManager.playerFSM.Running, gameObject, moveSpeed, an, rb, 1);
+            plManager.ChangeState(PlayerManager.playerFSM.Running, gameObject, localSpeed, an, rb, 1);
+            //rb.velocity = new Vector2(localSpeed, rb.velocity.y);
+            //transform.localScale = new Vector3(1, 1f, 1f);
 
         }
         //if left
@@ -67,8 +77,9 @@ public class PlayerController : MonoBehaviour {
         {
             //set PlayerFSM as Running
             //plManager.ChangeState(new Running(gameObject, -moveSpeed, an, rb, -1));
-            plManager.ChangeState(PlayerManager.playerFSM.Running, gameObject, -moveSpeed, an, rb, -1);
-
+            plManager.ChangeState(PlayerManager.playerFSM.Running, gameObject, -localSpeed, an, rb, -1);
+            //rb.velocity = new Vector2(-localSpeed, rb.velocity.y);
+            //transform.localScale = new Vector3(-1, 1f, 1f);
         }
         //if idle
         else
@@ -76,6 +87,8 @@ public class PlayerController : MonoBehaviour {
             //set PlayerFSM as Idle
             //plManager.ChangeState(new Idle(an, rb));
             plManager.ChangeState(PlayerManager.playerFSM.Idle, an, rb);
+            //rb.velocity = new Vector2(0, rb.velocity.y);
+
         }
 
 
@@ -93,11 +106,11 @@ public class PlayerController : MonoBehaviour {
 
 
 
+
+        //an.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+
+
         
-
-
-        an.SetBool("grounded", isGrounded);
-        an.SetBool("falling", isFalling);
 
     }
 }
