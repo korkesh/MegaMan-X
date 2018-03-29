@@ -14,7 +14,7 @@ public class Idle : IState {
         myRb = rb;
     }
 
-    public void passValues(Animator an, Rigidbody2D rb)
+    public void PassValues(Animator an, Rigidbody2D rb)
     {
        
         myAn = an;
@@ -23,7 +23,6 @@ public class Idle : IState {
 
 public void Enter()
     {
-        Debug.Log("Enter Idle");
     }
 
     public void Execute()
@@ -36,7 +35,6 @@ public void Enter()
 
     public void Exit()
     {
-        Debug.Log("Exit Idle");
     }
 
 }

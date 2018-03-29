@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour {
     Idle idle;
     Running running;
     Jumping jumping;
-    
+    Climbing climbing;
     
     
     
@@ -57,15 +57,19 @@ public class PlayerManager : MonoBehaviour {
         {
             case playerFSM.Running:
                 if (running == null) running = new Running((GameObject)items[0], (float)items[1], (Animator)items[2], (Rigidbody2D)items[3], (int)items[4]);
-                else running.passValues((GameObject)items[0], (float)items[1], (Animator)items[2], (Rigidbody2D)items[3], (int)items[4]);
+                else running.PassValues((GameObject)items[0], (float)items[1], (Animator)items[2], (Rigidbody2D)items[3], (int)items[4]);
                 newState = running;
                 break;
             case playerFSM.Jumping:
                 if (jumping == null) jumping = new Jumping((Animator)items[0], (Rigidbody2D)items[1], (float)items[2]);
-                else jumping.passValues((Animator)items[0], (Rigidbody2D)items[1], (float) items[2]);
+                else jumping.PassValues((Animator)items[0], (Rigidbody2D)items[1], (float) items[2]);
                 newState = jumping;
                 break;
             case playerFSM.Climbing:
+                if (climbing == null) climbing = new Climbing((Animator)items[0], (Rigidbody2D)items[1], (float)items[2]);
+                else climbing.PassValues((Animator)items[0], (Rigidbody2D)items[1], (float)items[2]);
+                Debug.Log(items[2] + " === ");
+                newState = climbing;
                 break;
             case playerFSM.Dashing:
                 break;
@@ -73,7 +77,7 @@ public class PlayerManager : MonoBehaviour {
                 break;
             case playerFSM.Idle:
                 if (idle == null) idle = new Idle((Animator)items[0], (Rigidbody2D)items[1]);
-                else idle.passValues((Animator)items[0], (Rigidbody2D)items[1]);
+                else idle.PassValues((Animator)items[0], (Rigidbody2D)items[1]);
                 newState = idle;
                 break;
         }

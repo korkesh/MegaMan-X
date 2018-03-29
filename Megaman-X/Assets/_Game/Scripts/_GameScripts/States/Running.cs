@@ -18,7 +18,7 @@ public class Running : IState
         myRb = rb;
         myDirection = direction;
     }
-    public void passValues(GameObject owner, float speed, Animator an, Rigidbody2D rb, int direction)
+    public void PassValues(GameObject owner, float speed, Animator an, Rigidbody2D rb, int direction)
     {
         myOwner = owner;
         mySpeed = speed;
@@ -29,12 +29,10 @@ public class Running : IState
 
     public void Enter()
     {
-        Debug.Log("Enter Running");
     }
 
     public void Execute()
     {
-        Debug.Log("--- Running --- ");
         myRb.velocity = new Vector2(mySpeed, myRb.velocity.y);
         myOwner.transform.localScale = new Vector3(myDirection, 1f, 1f);
 
@@ -44,7 +42,6 @@ public class Running : IState
 
     public void Exit()
     {
-        Debug.Log("Exit Running");
     }
 
 }

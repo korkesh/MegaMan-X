@@ -12,6 +12,7 @@ public class GroundCheck : MonoBehaviour {
         if (collision.CompareTag("Ground"))
         {
             player.isGrounded = true;
+            //player.an.SetBool("grounded", true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -19,6 +20,7 @@ public class GroundCheck : MonoBehaviour {
         if (collision.CompareTag("Ground"))
         {
             player.isGrounded = false;
+            //player.an.SetBool("grounded", false);
         }
     }
 }
