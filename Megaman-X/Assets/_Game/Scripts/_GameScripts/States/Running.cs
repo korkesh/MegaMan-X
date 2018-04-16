@@ -43,5 +43,8 @@ public class Running : IState
     public void Exit()
     {
     }
-
+    public string CheckState()
+    {
+        return "Running";
+    }
 }

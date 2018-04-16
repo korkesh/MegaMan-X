@@ -8,4 +8,5 @@ public interface IState
     void Enter(); //Enter State
     void Execute(); //Execute State
     void Exit(); //Exit State
+    string CheckState();
 }

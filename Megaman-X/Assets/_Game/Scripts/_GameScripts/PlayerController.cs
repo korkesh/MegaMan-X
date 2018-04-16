@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool isGrounded;
     public bool canClimb;
-    private bool isClimbing;
+    public bool isClimbing;
     private bool isFalling;
 
     private float localSpeed;
@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour {
 
     public Transform ladderPosition;
 
+
+    public BoxCollider2D playerHitbox;
+    public BoxCollider2D pLadderHitbox;
 
 	// Use this for initialization
 	void Start () {
@@ -130,11 +133,14 @@ public class PlayerController : MonoBehaviour {
 
             isClimbing = !isClimbing;
 
+            SwitchHitbox();
+
             transform.position = new Vector3(ladderPosition.position.x, transform.position.y, 0);
 
 
             if (!isClimbing)
             {
+
                 an.Play("MegamanFall");
             }
         }
@@ -153,7 +159,6 @@ public class PlayerController : MonoBehaviour {
 
             }
         }
-
         an.SetBool("climbing", isClimbing);
         an.SetBool("grounded", isGrounded);
         an.SetBool("falling", isFalling);
@@ -163,5 +168,12 @@ public class PlayerController : MonoBehaviour {
         
         
 
+    }
+
+    public void SwitchHitbox()
+    {
+
+        playerHitbox.enabled = !playerHitbox.enabled;
+        pLadderHitbox.enabled = !pLadderHitbox.enabled;
     }
 }

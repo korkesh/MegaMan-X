@@ -18,4 +18,8 @@ public class Firing : IState
     {
         Debug.Log("Exit Firing");
     }
+    public string CheckState()
+    {
+        return "Firing";
+    }
 }

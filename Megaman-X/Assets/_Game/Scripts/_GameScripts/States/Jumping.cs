@@ -37,5 +37,8 @@ public class Jumping : IState {
     public void Exit()
     {
     }
-
+    public string CheckState()
+    {
+        return "Jumping";
+    }
 }

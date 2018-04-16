@@ -42,6 +42,17 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public string CheckRunningState()
+    {
+        if (currentState != null)
+        {
+            return currentState.CheckState();
+
+        }
+        return "No State";
+
+    }
+
     public void ChangeState(playerFSM newPFSM, params object[] items)
     {
         if (newPFSM == currentPFSM)

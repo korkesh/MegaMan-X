@@ -46,4 +46,8 @@ public class Climbing : IState {
         Debug.Log("Exit Climbing");
     }
 
+    public string CheckState()
+    {
+        return "Climbing";
+    }
 }

@@ -36,5 +36,9 @@ public void Enter()
     public void Exit()
     {
     }
+    public string CheckState()
+    {
+        return "Idle";
+    }
 
 }
